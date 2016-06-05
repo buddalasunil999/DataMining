@@ -19,6 +19,10 @@ namespace WindowsFormsApplication2
 
         private void button1_Click(object sender, EventArgs e)
         {
+            int columns = Convert.ToInt32(textBox5.Text);
+            int precColumn = Convert.ToInt32(textBox6.Text);
+            int recallColumn = Convert.ToInt32(textBox7.Text);
+
             string input = textBox1.Text;
 
             string[] lines = input.Split((char[])null, StringSplitOptions.RemoveEmptyEntries);
@@ -32,21 +36,21 @@ namespace WindowsFormsApplication2
 
             foreach (var line in lines)
             {
-                if(index == 3)
+                if (index == precColumn)
                 {
                     textBox2.Text = line;
                 }
 
-                if(index == 138)
+                if (index == 15 * columns + precColumn)
                 {
                     textBox4.Text = line;
                 }
 
-                if (index == 4 || (index - 4) % 9 == 0)
+                if (index == recallColumn || (index - recallColumn) % columns == 0)
                 {
                     if (count > 0 && count < 15)
                     {
-                        sum += Convert.ToDouble(line) * numbers[count - 1];
+                        sum += GetValue(line) * numbers[count - 1];
                         label2.Text += line + "*" + numbers[count - 1] + " + ";
                     }
 
